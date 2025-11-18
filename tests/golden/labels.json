@@ -1,0 +1,5 @@
+{
+  "invalid_01.md": ["CLMD-001"],
+  "invalid_02.md": ["CLMD-003"],
+  "invalid_03.md": ["CLMD-002"]
+}
