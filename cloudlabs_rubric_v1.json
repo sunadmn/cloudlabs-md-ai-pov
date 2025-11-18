@@ -1,0 +1,186 @@
+{
+  "rubric_version": "1.0.0",
+  "last_updated": "2025-07-03",
+  "rules": [
+    {
+      "id": "CLMD-001",
+      "name": "Heading Space Compatibility",
+      "severity": "error",
+      "description": "Always put a space between the hash signs (#) and the heading name for compatibility, as Markdown applications do not all agree on handling missing spaces.",
+      "requires_spec_section": "Markdown Elements: Headings",
+      "check_type": "formatting",
+      "expected": {
+        "pattern": "[#]+[Space][Text]"
+      },
+      "examples": {
+        "valid": [
+          "# Heading level 1"
+        ],
+        "invalid": [
+          "#Heading level 1"
+        ]
+      },
+      "source_citation": "[3]"
+    },
+    {
+      "id": "CLMD-002",
+      "name": "Step Atomicity",
+      "severity": "warning",
+      "description": "Avoid defining multiple actions in a single numbered step. Steps must be split to ensure the instructional guide is easy to understand and follow.",
+      "requires_spec_section": "Best Practices: Writing Tips",
+      "check_type": "instructional_style",
+      "expected": {
+        "rule": "Each numbered step must contain a single, atomic action."
+      },
+      "examples": {
+        "valid": [
+          "1. Open Chrome browser."
+        ],
+        "invalid": [
+          "1. Open Chrome browser and navigate to the Wiz console."
+        ]
+      },
+      "source_citation": "[4]"
+    },
+    {
+      "id": "CLMD-003",
+      "name": "Wait Time Clarity",
+      "severity": "error",
+      "description": "Wait times after a step must be clearly called out using explicit durations, avoiding ambiguous statements.",
+      "requires_spec_section": "Best Practices: Writing Tips",
+      "check_type": "content_clarity",
+      "expected": {
+        "rule": "Wait times must be quantified (e.g., '5 minutes')."
+      },
+      "examples": {
+        "valid": [
+          "Correct: This step will take around 5 minutes to complete."
+        ],
+        "invalid": [
+          "Incorrect: This step will take some time to get completed."
+        ]
+      },
+      "source_citation": "[5]"
+    },
+    {
+      "id": "CLMD-004",
+      "name": "Non-Action Content Placement",
+      "severity": "warning",
+      "description": "Information that is not an active step should be structured as a note or info using elements like blockquotes, not as a numbered step.",
+      "requires_spec_section": "Best Practices: Writing Tips",
+      "check_type": "instructional_style",
+      "expected": {
+        "rule": "Use notes or blockquotes (>) for informational content."
+      },
+      "examples": {
+        "valid": [
+          "> Note: Document what you learn for future reference."
+        ],
+        "invalid": [
+          "6. If you are providing information, do not add it as a step."
+        ]
+      },
+      "source_citation": "[5]"
+    },
+    {
+      "id": "CLMD-005",
+      "name": "Structured Heading Hierarchy",
+      "severity": "error",
+      "description": "Avoid undefined headings after which numbering restarts to maintain a coherent, logical flow (Task 1 must be followed by Task 1.1, etc.).",
+      "requires_spec_section": "Best Practices: Writing Tips",
+      "check_type": "structural_hierarchy",
+      "expected": {
+        "rule": "Use sequential task/subtask numbering (e.g., Task 1 followed by Task 1.1)."
+      },
+      "examples": {
+        "valid": [
+          "Task 1: Step 1\\nStep 2\\nTask 1.1: Heading"
+        ],
+        "invalid": [
+          "Task 1: Step 1\\nStep 2\\nHeading"
+        ]
+      },
+      "source_citation": "[4]"
+    },
+    {
+      "id": "CLMD-006",
+      "name": "Blockquote Separation",
+      "severity": "error",
+      "description": "Provide a blank line before and after a blockquote to ensure Markdown exits the element, preventing subsequent lines from being included incorrectly.",
+      "requires_spec_section": "Markdown Elements: Blockquotes/Ordered Lists",
+      "check_type": "formatting",
+      "expected": {
+        "rule": "Blockquote content must be wrapped by blank lines."
+      },
+      "examples": {
+        "valid": [
+          "Accepted: Put a blank line before...\\n\\n> This is a blockquote\\n\\n...and after a blockquote."
+        ],
+        "invalid": [
+          "Not Accepted: Put a blank line before...\\n> This is a blockquote\\n>...and after a blockquote."
+        ]
+      },
+      "source_citation": "[6, 7]"
+    },
+    {
+      "id": "CLMD-007",
+      "name": "Personalized Inject Key Usage",
+      "severity": "error",
+      "description": "Use the custom 'inject keys' feature for inserting dynamic, personalized information (like account IDs, usernames, or passwords) instead of deprecated placeholders like UniqueID.",
+      "requires_spec_section": "Injecting Personalized Information into a Guide",
+      "check_type": "functional_syntax",
+      "expected": {
+        "pattern": "<inject key=\"KEY_NAME\"></inject>"
+      },
+      "examples": {
+        "valid": [
+          "Replace <YOUR_ACCOUNT_ID> with: <inject key=\"AWSAccountId\"></inject>"
+        ],
+        "invalid": [
+          "Using a placeholder like UniqueID"
+        ]
+      },
+      "source_citation": "[8-10]"
+    },
+    {
+      "id": "CLMD-008",
+      "name": "Local Image Pathing",
+      "severity": "error",
+      "description": "Images referenced via a local path (such as GitHub) must be placed in a separate folder, typically using the relative path structure './images/'.",
+      "requires_spec_section": "Markdown Elements: Images",
+      "check_type": "structural_pathing",
+      "expected": {
+        "pattern": "./images/<ImageFileName>"
+      },
+      "examples": {
+        "valid": [
+          "![Datacenter](./images/datacenter.jpg)"
+        ],
+        "invalid": [
+          "![Datacenter](datacenter.jpg)"
+        ]
+      },
+      "source_citation": "[11]"
+    },
+    {
+      "id": "CLMD-009",
+      "name": "Image Bracket Spacing",
+      "severity": "error",
+      "description": "Do not include any space immediately following the closing square bracket of the image description, as this can break rendering or compatibility.",
+      "requires_spec_section": "Markdown Elements: Images",
+      "check_type": "formatting",
+      "expected": {
+        "pattern": "![Description](URL)"
+      },
+      "examples": {
+        "valid": [
+          "![Datacenter](https://cloudlabsai.blob.core.windows.net/docs/datacenter.jpg)"
+        ],
+        "invalid": [
+          "![Datacenter ](https://cloudlabsai.blob.core.windows.net/docs/datacenter.jpg)"
+        ]
+      },
+      "source_citation": "[11]"
+    }
+  ]
+}
